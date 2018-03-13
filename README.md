@@ -1,28 +1,26 @@
 # Circle::Art
 
+A command line
+
+## Usage
+
+Get CircleCI token and set it as an ENV
+
+```bash
+export CIRCLE_TOKEN=<your-token>
 ```
-bundle exec bin/circle-art
+
+Until the gem is published, just git clone and install it.
+
+```bash
+bundle exec bin/circle-art username/repo build-number
 ```
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'circle-art'
-```
-
-And then execute:
-
-    $ bundle
-
 Or install it yourself as:
 
     $ gem install circle-art
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 

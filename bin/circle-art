@@ -2,4 +2,27 @@
 
 require 'circle/art'
 
-puts "Hello, world!"
+token = ENV['CIRCLE_TOKEN']
+
+raise "Please set CIRCLE_TOKEN env variable first." unless token
+
+repo  = ARGV[0]
+build = ARGV[1]
+
+puts "Download artifacts for Repo #{ARGV[0]}, Build ##{ARGV[1]}"
+
+url = UrlBuilder.new(repo, build, token)
+
+if url.downloaded?(url.json_path)
+  puts "Load from local"
+else
+  puts "🌐  Getting CircleCI meta info"
+  url.download_json!
+end
+
+parser = Parser.new(path: url.json_path)
+
+url.download!(parser)
+
+cuke = CukeBuilder.new(build, parser)
+cuke.build_reports!
