@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    circle-art (0.1.0)
+    circle-art (0.1.2)
       report_builder
       sinatra
       thin

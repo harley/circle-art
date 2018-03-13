@@ -8,19 +8,20 @@ raise "Please set CIRCLE_TOKEN env variable first." unless token
 
 repo  = ARGV[0]
 build = ARGV[1]
+pattern = ARGV[2]
 
-puts "Download artifacts for Repo #{ARGV[0]}, Build ##{ARGV[1]}"
+puts "Download [#{pattern}] artifacts for Repo #{ARGV[0]}, Build ##{ARGV[1]}"
 
 url = UrlBuilder.new(repo, build, token)
 
-if url.downloaded?(url.json_path)
+if File.exist?(url.json_path)
   puts "Load from local"
 else
   puts "🌐  Getting CircleCI meta info"
   url.download_json!
 end
 
-parser = Parser.new(path: url.json_path)
+parser = Parser.new(path: url.json_path, pattern: pattern)
 
 url.download!(parser)
 

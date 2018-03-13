@@ -36,6 +36,16 @@ RSpec.describe Circle::Art do
     it "extracts filenames" do
       expect(parser.filenames).to include("3-release.cucumber")
     end
+
+    it "filters by pattern cucumber" do
+      parser = Parser.new(text: json_text, pattern: "cucumber")
+      expect(parser.filenames).to eq(["3-release.cucumber"])
+    end
+
+    it "filters by pattern whatever" do
+      parser = Parser.new(text: json_text, pattern: "whatever")
+      expect(parser.filenames).to eq(["0-whatever.jpg"])
+    end
   end
 
   describe CukeBuilder do

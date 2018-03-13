@@ -10,6 +10,9 @@ class UrlBuilder
     @build = build
     @token = token
 
+    raise "Missing repo" unless @repo
+    raise "Missing build" unless @build
+
 
     system("mkdir -p downloads/#{build}/artifacts")
     system("mkdir -p downloads/builds")
@@ -17,10 +20,6 @@ class UrlBuilder
 
   def folder_path
     "downloads/#{build}/artifacts"
-  end
-
-  def downloaded?(path)
-    File.exist?(path)
   end
 
   def json_path
@@ -33,7 +32,7 @@ class UrlBuilder
 
   def download_json!
     # save json
-    unless downloaded?(json_path)
+    unless File.exist?(json_path)
       system(download_cmd + " --output #{json_path}")
     end
   end
@@ -47,7 +46,7 @@ class UrlBuilder
   end
 
   def download!(parser)
-    if downloaded?(folder_path)
+    if Dir[File.join(folder_path, "*")].length > 0
       puts "Already downloaded."
       return
     end
@@ -61,26 +60,29 @@ class UrlBuilder
 end
 
 class Parser
+  attr_reader :json, :pattern
+
   # TODO: support path to file
-  def initialize(path: nil, text: nil)
+  def initialize(path: nil, text: nil, pattern: '')
     if path
       text = File.read(path)
     end
 
     @json = JSON.parse(text)
+    @pattern = pattern
   end
 
-  def json
-    @json
+  def hashes
+    @hashes ||= @json.select {|e| e["url"].split('/').last.match(pattern)}
   end
 
   def urls
-    @urls ||= @json.map{|e| e["url"]}
+    @urls ||= hashes.map{|e| e["url"]}
   end
 
   def filenames
     @filenames ||= urls.map.with_index do |e, index|
-      "#{@json[index]['node_index']}-" + e.split('/').last
+      "#{hashes[index]['node_index']}-" + e.split('/').last
     end
   end
 end

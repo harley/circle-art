@@ -1,6 +1,6 @@
 # Circle::Art
 
-A command line
+WIP: A command line to download cucumber reports from CircleCI artifacts (split across containers) and combine them.
 
 ## Usage
 
