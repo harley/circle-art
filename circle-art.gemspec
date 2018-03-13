@@ -35,5 +35,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_dependency "report_builder"
   spec.add_dependency "sinatra"
-  spec.add_dependency "thin" # picked up by sinatra
 end
