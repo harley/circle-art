@@ -9,6 +9,10 @@ class UrlBuilder
     @repo = repo
     @build = build
     @token = token
+
+
+    system("mkdir -p downloads/#{build}/artifacts")
+    system("mkdir -p downloads/builds")
   end
 
   def folder_path
@@ -46,8 +50,6 @@ class UrlBuilder
     if downloaded?(folder_path)
       puts "Already downloaded."
       return
-    else
-      system("mkdir -p #{folder_path}")
     end
 
     parser.urls.each_with_index do |url, index|
@@ -90,7 +92,7 @@ class CukeBuilder
     @build = build
     @parser = parser
     @download_path = "downloads/#{build}/artifacts"
-    @report_path = "downloads/#{build}/results"
+    @report_path = "downloads/builds/#{build}"
   end
 
   def tests_files

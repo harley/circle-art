@@ -3,12 +3,20 @@ PATH
   specs:
     circle-art (0.1.0)
       report_builder
+      sinatra
+      thin
 
 GEM
   remote: https://rubygems.org/
   specs:
+    daemons (1.2.6)
     diff-lcs (1.3)
+    eventmachine (1.2.5)
     json (2.1.0)
+    mustermann (1.0.2)
+    rack (2.0.4)
+    rack-protection (2.0.1)
+      rack
     rake (10.5.0)
     report_builder (1.5)
       json (>= 1.8.1)
@@ -25,6 +33,16 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    sinatra (2.0.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.1)
+      tilt (~> 2.0)
+    thin (1.7.2)
+      daemons (~> 1.0, >= 1.0.9)
+      eventmachine (~> 1.0, >= 1.0.4)
+      rack (>= 1, < 3)
+    tilt (2.0.8)
 
 PLATFORMS
   ruby
