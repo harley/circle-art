@@ -1,26 +1,28 @@
 # Circle::Art
 
-WIP: A command line to download cucumber reports from CircleCI artifacts (split across containers) and combine them.
+A command line to download cucumber reports from CircleCI artifacts (split across containers) and combine them.
+## Installation
+
+You add in your app's Gemfile and use the API directly. Instructions to come.
+
+Or install directly to use the command line
+
+    $ gem install circle-art
+
 
 ## Usage
 
-Get CircleCI token and set it as an ENV
+Get CircleCI token and set it as an ENV. If you haven't, it will [show you how](https://cl.ly/0R0S0g3f3t3t)
 
 ```bash
 export CIRCLE_TOKEN=<your-token>
 ```
 
-Until the gem is published, just git clone and install it.
+Input the repo and build number to generate a `downloads/<build-number>.html`
 
 ```bash
-bundle exec bin/circle-art username/repo build-number
+circle-art username/repo build-number
 ```
-
-## Installation
-
-Or install it yourself as:
-
-    $ gem install circle-art
 
 ## Development
 

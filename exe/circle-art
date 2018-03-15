@@ -4,7 +4,9 @@ require 'circle/art'
 
 token = ENV['CIRCLE_TOKEN']
 
-raise "Please set CIRCLE_TOKEN env variable first." unless token
+unless token
+  raise "Please set CIRCLE_TOKEN env variable. Visit https://circleci.com/account/api to get one"
+end
 
 repo  = ARGV[0]
 build = ARGV[1]
